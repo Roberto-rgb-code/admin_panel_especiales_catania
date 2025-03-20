@@ -160,9 +160,9 @@ const EspecialesForm = () => {
               className="form-select"
             >
               <option value="">Selecciona una categoría</option>
-              <option value="Ropa">Ropa</option>
-              <option value="Accesorios">Accesorios</option>
-              <option value="Equipo">Equipo</option>
+              <option value="Textil">Ropa</option>
+              <option value="Promocional">Accesorios</option>
+              <option value="Otros">Equipo</option>
             </select>
           </div>
           {existingPhotos.length > 0 && (
