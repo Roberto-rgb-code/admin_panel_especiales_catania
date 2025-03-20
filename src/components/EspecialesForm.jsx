@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './EspecialesForm.css';
 
-const apiUrl = import.meta.env.VITE_ESPECIALES_API_URL || 'http://localhost:8000';
+const apiUrl = import.meta.env.VITE_ESPECIALES_API_URL || 'https://adminpanelespecialescatania.netlify.app';
 
 const EspecialesForm = () => {
   const { id } = useParams();
