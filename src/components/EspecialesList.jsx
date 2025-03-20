@@ -10,7 +10,7 @@ const EspecialesList = () => {
   const [error, setError] = useState(null);
 
   // URL base definida en el .env para el backend de especiales
-  const apiUrl = import.meta.env.VITE_ESPECIALES_API_URL || 'https://adminpanelespecialescatania.netlify.app';
+  const apiUrl = import.meta.env.VITE_ESPECIALES_API_URL;
 
   useEffect(() => {
     fetchEspeciales();
