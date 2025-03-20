@@ -73,7 +73,7 @@ const EspecialesForm = () => {
   const handleRemoveExistingPhoto = async (fotoId) => {
     try {
       if (!window.confirm('¿Eliminar esta foto?')) return;
-      await axios.delete(`${apiUrl}/api/fotos/${fotoId}`); // Necesitarías este endpoint en el backend
+      await axios.delete(`${apiUrl}/api/fotos/${fotoId}`);
       setExistingPhotos(prev => prev.filter(f => f.id !== fotoId));
     } catch (err) {
       console.error('Error al eliminar la foto:', err);
@@ -110,11 +110,13 @@ const EspecialesForm = () => {
       navigate('/');
     } catch (error) {
       if (error.response && error.response.status === 422) {
-        setError('Validación fallida: ' + JSON.stringify(error.response.data.errors));
+        const validationErrors = error.response.data.errors;
+        setError('Validación fallida: ' + Object.values(validationErrors).flat().join(', '));
+        console.error('Errores de validación:', validationErrors);
       } else {
-        setError('Error al guardar el especial: ' + error.message);
+        setError('Error al guardar el especial: ' + (error.response?.data?.message || error.message));
       }
-      console.error('Error al guardar el especial:', error);
+      console.error('Error completo al guardar el especial:', error.response?.data || error);
     } finally {
       setLoading(false);
     }
@@ -160,9 +162,9 @@ const EspecialesForm = () => {
               className="form-select"
             >
               <option value="">Selecciona una categoría</option>
-              <option value="Textil">Ropa</option>
-              <option value="Promocional">Accesorios</option>
-              <option value="Otros">Equipo</option>
+              <option value="Textil">Textil</option>
+              <option value="Promocional">Promocional</option>
+              <option value="Otros">Otros</option>
             </select>
           </div>
           {existingPhotos.length > 0 && (
